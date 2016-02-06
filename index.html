@@ -9,6 +9,7 @@
 		<script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
 		<script src="node_modules/rxjs/bundles/Rx.js"></script>
 		<script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+		<script src="node_modules/angular2/bundles/http.dev.js"></script>
 	</head>
 	<body>
 		<todo-app></todo-app>
@@ -17,11 +18,16 @@
 		</footer>
 		<script>
 			System.config({
+				paths: {
+					'rxjs/operator/*': 'node_modules/rxjs/add/operator/*.js',
+					'rxjs/*' : 'node_modules/rxjs/*.js'
+				},
 				packages: {
 					'app': {
 						format: 'cjs',
 						defaultExtension: 'js'
-					}
+					},
+					'../node_modules/rxjs': { defaultExtension: 'js' }
 				}
 			});
 			System.import('app/bootstrap');

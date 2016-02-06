@@ -8,6 +8,7 @@ Foreach repo opens CHANGELOG.
     grabs contents of that commit
     adds to paragraph about that repo
 
+http://localhost:3000/api?repos=goatslacker/alt,goatslacker/iso
 
 NOTE:
 different changelog locations..have list of all possible ones OR go Badge/Tag route

@@ -1,19 +1,47 @@
 import {Component} from 'angular2/core';
 import {ChangeLogStore, TodoStore, Todo} from './services/store';
+import {Http} from "angular2/http";
+import 'rxjs/operator/map';
 
 @Component({
 	selector: 'todo-app',
 	templateUrl: 'app/app.html',
 	bindings: [ChangeLogStore, TodoStore]
 })
+
 export default class TodoApp {
 	todoStore: TodoStore;
 	changeLogStore: ChangeLogStore;
 	newTodoText = '';
+	http: Http;
 
-	constructor(todoStore: TodoStore, changeLogStore: ChangeLogStore) {
+
+	constructor(todoStore: TodoStore, changeLogStore: ChangeLogStore, http: Http) {
 		this.todoStore = todoStore;
 		this.changeLogStore = changeLogStore;
+		this.http = http;
+
+		// when load get request
+		http.get('http://localhost:3000/api')
+			.map(res => res.text())
+	    .subscribe(
+	      data => this.successRequest(data),
+	      err => this.errorRequest(err),
+	      () => this.alwaysRequest()
+	    );
+
+	}
+
+	successRequest(data: string) {
+		console.log(data);
+	}
+
+	errorRequest(error: string) {
+		console.log(error);
+	}
+
+	alwaysRequest() {
+		console.log('always run')
 	}
 
 	stopEditing(todo: Todo, editedTitle: string) {

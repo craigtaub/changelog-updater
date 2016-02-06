@@ -21,6 +21,7 @@ export class RepoStore {
 	repos: Array<Repo>;
 
 	constructor() {
+		console.log('repoStore const start');
 		let persistedRepos = JSON.parse(localStorage.getItem('repo-store') || '[]');
 		// Normalize back into classes
 		this.repos = persistedRepos.map( (repo: {_title: String, completed: Boolean}) => {
@@ -28,6 +29,8 @@ export class RepoStore {
 			ret.completed = repo.completed;
 			return ret;
 		});
+
+		console.log('repoStore const end');
 	}
 
 	private updateStore() {
@@ -71,8 +74,8 @@ export class RepoStore {
 	}
 
 	add(title: String) {
+		console.log('add repoStore');
 		this.repos.push(new Repo(title));
-		// console.log('ADD');
 
 		this.updateStore();
 	}

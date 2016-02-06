@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var http_1 = require('angular2/http');
 var core_1 = require('angular2/core');
 require('rxjs/operator/map');
+var apiUrl = 'http://localhost:3000/api';
 var ChangeLog = (function () {
     function ChangeLog(repoName, update) {
         this._repoName = repoName.trim();
@@ -43,11 +44,13 @@ var ChangeLog = (function () {
 exports.ChangeLog = ChangeLog;
 var ChangeLogStore = (function () {
     function ChangeLogStore(http) {
+        console.log('changeLogStore const start');
         this.changelogs = [];
         this.http = http;
         // when load get request
         // http.get('http://localhost:3000/api?repos=goatslacker/alt')
-        this.makeRequest('http://localhost:3000/api');
+        // this.makeRequest(apiUrl);
+        console.log('changeLogStore const end');
     }
     ChangeLogStore.prototype.makeRequest = function (url) {
         var _this = this;
@@ -56,7 +59,6 @@ var ChangeLogStore = (function () {
             .subscribe(function (data) { return _this.successRequest(data); }, function (err) { return _this.errorRequest(err); }, function () { return _this.alwaysRequest(); });
     };
     ChangeLogStore.prototype.successRequest = function (data) {
-        // console.log(data.data);
         var item = data.data[0];
         if (item.hasOwnProperty('repoName')) {
             this.changelogs.push(new ChangeLog(item.repoName, item.update));
@@ -69,8 +71,11 @@ var ChangeLogStore = (function () {
         console.log('always run');
     };
     ChangeLogStore.prototype.add = function (repo) {
-        console.log('change add: ', repo);
-        this.makeRequest('http://localhost:3000/api?repos=' + repo);
+        console.log('add changeLogStore');
+        this.makeRequest(apiUrl + '?repos=' + repo);
+    };
+    ChangeLogStore.prototype.remove = function (repo) {
+        this.changelogs.splice(this.changelogs.indexOf(repo), 1);
     };
     ChangeLogStore = __decorate([
         __param(0, core_1.Inject(http_1.Http)), 

@@ -12,10 +12,15 @@ var repoStore_1 = require('./services/repoStore');
 var changeLogStore_1 = require('./services/changeLogStore');
 var RepoApp = (function () {
     function RepoApp(repoStore, changeLogStore) {
+        var _this = this;
         this.newTodoText = '';
-        console.log('constructor');
+        console.log('app constructor');
         this.repoStore = repoStore;
         this.changeLogStore = changeLogStore;
+        // when loads app repos already added onto page
+        this.repoStore.repos.forEach(function (item) {
+            _this.changeLogStore.add(item.title);
+        });
     }
     RepoApp.prototype.stopEditing = function (repo, editedTitle) {
         repo.title = editedTitle;
@@ -36,15 +41,19 @@ var RepoApp = (function () {
         repo.editing = true;
     };
     RepoApp.prototype.removeCompleted = function () {
+        console.log('removeCompleted');
         this.repoStore.removeCompleted();
     };
     RepoApp.prototype.toggleCompletion = function (repo) {
+        console.log('toggleCompletion');
         this.repoStore.toggleCompletion(repo);
     };
     RepoApp.prototype.remove = function (repo) {
         this.repoStore.remove(repo);
+        this.changeLogStore.remove(repo);
     };
     RepoApp.prototype.addTodo = function () {
+        console.log('addTodo');
         if (this.newTodoText.trim().length) {
             this.changeLogStore.add(this.newTodoText.trim());
             this.repoStore.add(this.newTodoText);

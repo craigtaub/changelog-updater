@@ -14,9 +14,15 @@ export default class RepoApp {
 	newTodoText = '';
 
 	constructor(repoStore: RepoStore, changeLogStore: ChangeLogStore) {
-				console.log('constructor');
+		console.log('app constructor');
 		this.repoStore = repoStore;
 		this.changeLogStore = changeLogStore;
+
+		// when loads app repos already added onto page
+		this.repoStore.repos.forEach((item) => {
+				this.changeLogStore.add(item.title);
+		});
+
 	}
 
 	stopEditing(repo: Repo, editedTitle: string) {
@@ -44,19 +50,22 @@ export default class RepoApp {
 	}
 
 	removeCompleted() {
+		console.log('removeCompleted');
 		this.repoStore.removeCompleted();
 	}
 
 	toggleCompletion(repo: Repo) {
+		console.log('toggleCompletion');
 		this.repoStore.toggleCompletion(repo);
 	}
 
 	remove(repo: Repo){
 		this.repoStore.remove(repo);
+		this.changeLogStore.remove(repo);
 	}
 
 	addTodo() {
-
+		console.log('addTodo');
 		if (this.newTodoText.trim().length) {
 			this.changeLogStore.add(this.newTodoText.trim());
 			this.repoStore.add(this.newTodoText);

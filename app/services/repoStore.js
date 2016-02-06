@@ -19,6 +19,7 @@ var Repo = (function () {
 exports.Repo = Repo;
 var RepoStore = (function () {
     function RepoStore() {
+        console.log('repoStore const start');
         var persistedRepos = JSON.parse(localStorage.getItem('repo-store') || '[]');
         // Normalize back into classes
         this.repos = persistedRepos.map(function (repo) {
@@ -26,6 +27,7 @@ var RepoStore = (function () {
             ret.completed = repo.completed;
             return ret;
         });
+        console.log('repoStore const end');
     }
     RepoStore.prototype.updateStore = function () {
         localStorage.setItem('repo-store', JSON.stringify(this.repos));
@@ -59,8 +61,8 @@ var RepoStore = (function () {
         this.updateStore();
     };
     RepoStore.prototype.add = function (title) {
+        console.log('add repoStore');
         this.repos.push(new Repo(title));
-        // console.log('ADD');
         this.updateStore();
     };
     return RepoStore;

@@ -1,65 +1,65 @@
 import {Component} from 'angular2/core';
-import {TodoStore, Todo} from './services/todoStore';
+import {RepoStore, Repo} from './services/repoStore';
 import {ChangeLogStore} from './services/changeLogStore';
 
 @Component({
-	selector: 'todo-app',
+	selector: 'repo-app',
 	templateUrl: 'app/app.html',
-	bindings: [ChangeLogStore, TodoStore]
+	bindings: [ChangeLogStore, RepoStore]
 })
 
-export default class TodoApp {
-	todoStore: TodoStore;
+export default class RepoApp {
+	repoStore: RepoStore;
 	changeLogStore: ChangeLogStore;
 	newTodoText = '';
 
-	constructor(todoStore: TodoStore, changeLogStore: ChangeLogStore) {
+	constructor(repoStore: RepoStore, changeLogStore: ChangeLogStore) {
 				console.log('constructor');
-		this.todoStore = todoStore;
+		this.repoStore = repoStore;
 		this.changeLogStore = changeLogStore;
 	}
 
-	stopEditing(todo: Todo, editedTitle: string) {
-		todo.title = editedTitle;
-		todo.editing = false;
+	stopEditing(repo: Repo, editedTitle: string) {
+		repo.title = editedTitle;
+		repo.editing = false;
 	}
 
-	cancelEditingTodo(todo: Todo) {
-		todo.editing = false;
+	cancelEditingTodo(repo: Repo) {
+		repo.editing = false;
 	}
 
-	updateEditingTodo(todo: Todo, editedTitle: string) {
+	updateEditingTodo(repo: Repo, editedTitle: string) {
 		editedTitle = editedTitle.trim();
-		todo.editing = false;
+		repo.editing = false;
 
 		if (editedTitle.length === 0) {
-			return this.todoStore.remove(todo);
+			return this.repoStore.remove(repo);
 		}
 
-		todo.title = editedTitle;
+		repo.title = editedTitle;
 	}
 
-	editTodo(todo: Todo) {
-		todo.editing = true;
+	editTodo(repo: Repo) {
+		repo.editing = true;
 	}
 
 	removeCompleted() {
-		this.todoStore.removeCompleted();
+		this.repoStore.removeCompleted();
 	}
 
-	toggleCompletion(todo: Todo) {
-		this.todoStore.toggleCompletion(todo);
+	toggleCompletion(repo: Repo) {
+		this.repoStore.toggleCompletion(repo);
 	}
 
-	remove(todo: Todo){
-		this.todoStore.remove(todo);
+	remove(repo: Repo){
+		this.repoStore.remove(repo);
 	}
 
 	addTodo() {
 
 		if (this.newTodoText.trim().length) {
 			this.changeLogStore.add(this.newTodoText.trim());
-			this.todoStore.add(this.newTodoText);
+			this.repoStore.add(this.newTodoText);
 			this.newTodoText = '';
 		}
 	}

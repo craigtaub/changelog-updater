@@ -1,6 +1,6 @@
 import {bootstrap} from 'angular2/platform/browser';
-import TodoApp from './app'
-import {TodoStore} from './services/todoStore';
+import RepoApp from './app'
+import {RepoStore} from './services/RepoStore';
 import { HTTP_PROVIDERS } from 'angular2/http';
 
-bootstrap(TodoApp, [TodoStore, HTTP_PROVIDERS]);
+bootstrap(RepoApp, [RepoStore, HTTP_PROVIDERS]);

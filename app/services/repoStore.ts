@@ -1,4 +1,4 @@
-export class Todo {
+export class Repo {
 	completed: Boolean;
 	editing: Boolean;
 
@@ -17,38 +17,38 @@ export class Todo {
 	}
 }
 
-export class TodoStore {
-	todos: Array<Todo>;
+export class RepoStore {
+	repos: Array<Repo>;
 
 	constructor() {
-		let persistedTodos = JSON.parse(localStorage.getItem('angular2-todos') || '[]');
+		let persistedRepos = JSON.parse(localStorage.getItem('repo-store') || '[]');
 		// Normalize back into classes
-		this.todos = persistedTodos.map( (todo: {_title: String, completed: Boolean}) => {
-			let ret = new Todo(todo._title);
-			ret.completed = todo.completed;
+		this.repos = persistedRepos.map( (repo: {_title: String, completed: Boolean}) => {
+			let ret = new Repo(repo._title);
+			ret.completed = repo.completed;
 			return ret;
 		});
 	}
 
 	private updateStore() {
-		localStorage.setItem('angular2-todos', JSON.stringify(this.todos));
+		localStorage.setItem('repo-store', JSON.stringify(this.repos));
 	}
 
 	private getWithCompleted(completed: Boolean) {
-		return this.todos.filter((todo: Todo) => todo.completed === completed);
+		return this.repos.filter((repo: Repo) => repo.completed === completed);
 	}
 
 	allCompleted() {
-		return this.todos.length === this.getCompleted().length;
+		return this.repos.length === this.getCompleted().length;
 	}
 
 	setAllTo(completed: Boolean) {
-		this.todos.forEach((t: Todo) => t.completed = completed);
+		this.repos.forEach((t: Repo) => t.completed = completed);
 		this.updateStore();
 	}
 
 	removeCompleted() {
-		this.todos = this.getWithCompleted(false);
+		this.repos = this.getWithCompleted(false);
 		this.updateStore();
 	}
 
@@ -60,18 +60,18 @@ export class TodoStore {
 		return this.getWithCompleted(true);
 	}
 
-	toggleCompletion(todo: Todo) {
-		todo.completed = !todo.completed;
+	toggleCompletion(repo: Repo) {
+		repo.completed = !repo.completed;
 		this.updateStore();
 	}
 
-	remove(todo: Todo) {
-		this.todos.splice(this.todos.indexOf(todo), 1);
+	remove(repo: Repo) {
+		this.repos.splice(this.repos.indexOf(repo), 1);
 		this.updateStore();
 	}
 
 	add(title: String) {
-		this.todos.push(new Todo(title));
+		this.repos.push(new Repo(title));
 		// console.log('ADD');
 
 		this.updateStore();

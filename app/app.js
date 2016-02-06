@@ -8,59 +8,59 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var todoStore_1 = require('./services/todoStore');
+var repoStore_1 = require('./services/repoStore');
 var changeLogStore_1 = require('./services/changeLogStore');
-var TodoApp = (function () {
-    function TodoApp(todoStore, changeLogStore) {
+var RepoApp = (function () {
+    function RepoApp(repoStore, changeLogStore) {
         this.newTodoText = '';
         console.log('constructor');
-        this.todoStore = todoStore;
+        this.repoStore = repoStore;
         this.changeLogStore = changeLogStore;
     }
-    TodoApp.prototype.stopEditing = function (todo, editedTitle) {
-        todo.title = editedTitle;
-        todo.editing = false;
+    RepoApp.prototype.stopEditing = function (repo, editedTitle) {
+        repo.title = editedTitle;
+        repo.editing = false;
     };
-    TodoApp.prototype.cancelEditingTodo = function (todo) {
-        todo.editing = false;
+    RepoApp.prototype.cancelEditingTodo = function (repo) {
+        repo.editing = false;
     };
-    TodoApp.prototype.updateEditingTodo = function (todo, editedTitle) {
+    RepoApp.prototype.updateEditingTodo = function (repo, editedTitle) {
         editedTitle = editedTitle.trim();
-        todo.editing = false;
+        repo.editing = false;
         if (editedTitle.length === 0) {
-            return this.todoStore.remove(todo);
+            return this.repoStore.remove(repo);
         }
-        todo.title = editedTitle;
+        repo.title = editedTitle;
     };
-    TodoApp.prototype.editTodo = function (todo) {
-        todo.editing = true;
+    RepoApp.prototype.editTodo = function (repo) {
+        repo.editing = true;
     };
-    TodoApp.prototype.removeCompleted = function () {
-        this.todoStore.removeCompleted();
+    RepoApp.prototype.removeCompleted = function () {
+        this.repoStore.removeCompleted();
     };
-    TodoApp.prototype.toggleCompletion = function (todo) {
-        this.todoStore.toggleCompletion(todo);
+    RepoApp.prototype.toggleCompletion = function (repo) {
+        this.repoStore.toggleCompletion(repo);
     };
-    TodoApp.prototype.remove = function (todo) {
-        this.todoStore.remove(todo);
+    RepoApp.prototype.remove = function (repo) {
+        this.repoStore.remove(repo);
     };
-    TodoApp.prototype.addTodo = function () {
+    RepoApp.prototype.addTodo = function () {
         if (this.newTodoText.trim().length) {
             this.changeLogStore.add(this.newTodoText.trim());
-            this.todoStore.add(this.newTodoText);
+            this.repoStore.add(this.newTodoText);
             this.newTodoText = '';
         }
     };
-    TodoApp = __decorate([
+    RepoApp = __decorate([
         core_1.Component({
-            selector: 'todo-app',
+            selector: 'repo-app',
             templateUrl: 'app/app.html',
-            bindings: [changeLogStore_1.ChangeLogStore, todoStore_1.TodoStore]
+            bindings: [changeLogStore_1.ChangeLogStore, repoStore_1.RepoStore]
         }), 
-        __metadata('design:paramtypes', [todoStore_1.TodoStore, changeLogStore_1.ChangeLogStore])
-    ], TodoApp);
-    return TodoApp;
+        __metadata('design:paramtypes', [repoStore_1.RepoStore, changeLogStore_1.ChangeLogStore])
+    ], RepoApp);
+    return RepoApp;
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = TodoApp;
+exports.default = RepoApp;
 //# sourceMappingURL=app.js.map

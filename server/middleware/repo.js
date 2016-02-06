@@ -69,10 +69,10 @@ function repo(repo) {
   function returnResult(finalString) {
     return new Promise(function (resolve, reject) {
 
-      let dataObject = {};
-      dataObject[repo] = finalString;
-      // key -> repo name
-      // value -> string
+      let dataObject = {
+        repoName: repo,
+        update: finalString
+      };
       return resolve(dataObject);
     });
   }

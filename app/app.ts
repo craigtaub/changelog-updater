@@ -1,7 +1,6 @@
 import {Component} from 'angular2/core';
-import {ChangeLogStore, TodoStore, Todo} from './services/store';
-import {Http} from "angular2/http";
-import 'rxjs/operator/map';
+import {TodoStore, Todo} from './services/todoStore';
+import {ChangeLogStore} from './services/changeLogStore';
 
 @Component({
 	selector: 'todo-app',
@@ -13,35 +12,11 @@ export default class TodoApp {
 	todoStore: TodoStore;
 	changeLogStore: ChangeLogStore;
 	newTodoText = '';
-	http: Http;
 
-
-	constructor(todoStore: TodoStore, changeLogStore: ChangeLogStore, http: Http) {
+	constructor(todoStore: TodoStore, changeLogStore: ChangeLogStore) {
+				console.log('constructor');
 		this.todoStore = todoStore;
 		this.changeLogStore = changeLogStore;
-		this.http = http;
-
-		// when load get request
-		http.get('http://localhost:3000/api')
-			.map(res => res.text())
-	    .subscribe(
-	      data => this.successRequest(data),
-	      err => this.errorRequest(err),
-	      () => this.alwaysRequest()
-	    );
-
-	}
-
-	successRequest(data: string) {
-		console.log(data);
-	}
-
-	errorRequest(error: string) {
-		console.log(error);
-	}
-
-	alwaysRequest() {
-		console.log('always run')
 	}
 
 	stopEditing(todo: Todo, editedTitle: string) {
@@ -81,7 +56,9 @@ export default class TodoApp {
 	}
 
 	addTodo() {
+
 		if (this.newTodoText.trim().length) {
+			this.changeLogStore.add(this.newTodoText.trim());
 			this.todoStore.add(this.newTodoText);
 			this.newTodoText = '';
 		}

@@ -24,7 +24,8 @@ function github(req, resp) {
       });
 
   } else {
-    return resp.send('no repo');
+    resp.setHeader('Content-Type', 'application/json');
+    return resp.send(JSON.stringify({data: 'no repo'}, null, 3));
   }
 
 }

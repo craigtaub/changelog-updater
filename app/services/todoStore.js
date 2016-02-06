@@ -60,37 +60,10 @@ var TodoStore = (function () {
     };
     TodoStore.prototype.add = function (title) {
         this.todos.push(new Todo(title));
-        console.log('ADD');
+        // console.log('ADD');
         this.updateStore();
     };
     return TodoStore;
 })();
 exports.TodoStore = TodoStore;
-var Thing = (function () {
-    function Thing(title) {
-        this.title = title.trim();
-    }
-    Object.defineProperty(Thing.prototype, "title", {
-        get: function () {
-            return this._title;
-        },
-        set: function (value) {
-            this._title = value.trim();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Thing;
-})();
-exports.Thing = Thing;
-var ChangeLogStore = (function () {
-    function ChangeLogStore() {
-        console.log('ChangeLogStore constructor');
-        var thingOne = new Thing('first');
-        var thingTwo = new Thing('second');
-        this.changelogs = [thingOne, thingTwo];
-    }
-    return ChangeLogStore;
-})();
-exports.ChangeLogStore = ChangeLogStore;
-//# sourceMappingURL=store.js.map
+//# sourceMappingURL=todoStore.js.map

@@ -8,30 +8,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var store_1 = require('./services/store');
-var http_1 = require("angular2/http");
-require('rxjs/operator/map');
+var todoStore_1 = require('./services/todoStore');
+var changeLogStore_1 = require('./services/changeLogStore');
 var TodoApp = (function () {
-    function TodoApp(todoStore, changeLogStore, http) {
-        var _this = this;
+    function TodoApp(todoStore, changeLogStore) {
         this.newTodoText = '';
+        console.log('constructor');
         this.todoStore = todoStore;
         this.changeLogStore = changeLogStore;
-        this.http = http;
-        // when load get request
-        http.get('http://localhost:3000/api')
-            .map(function (res) { return res.text(); })
-            .subscribe(function (data) { return _this.successRequest(data); }, function (err) { return _this.errorRequest(err); }, function () { return _this.alwaysRequest(); });
     }
-    TodoApp.prototype.successRequest = function (data) {
-        console.log(data);
-    };
-    TodoApp.prototype.errorRequest = function (error) {
-        console.log(error);
-    };
-    TodoApp.prototype.alwaysRequest = function () {
-        console.log('always run');
-    };
     TodoApp.prototype.stopEditing = function (todo, editedTitle) {
         todo.title = editedTitle;
         todo.editing = false;
@@ -61,6 +46,7 @@ var TodoApp = (function () {
     };
     TodoApp.prototype.addTodo = function () {
         if (this.newTodoText.trim().length) {
+            this.changeLogStore.add(this.newTodoText.trim());
             this.todoStore.add(this.newTodoText);
             this.newTodoText = '';
         }
@@ -69,9 +55,9 @@ var TodoApp = (function () {
         core_1.Component({
             selector: 'todo-app',
             templateUrl: 'app/app.html',
-            bindings: [store_1.ChangeLogStore, store_1.TodoStore]
+            bindings: [changeLogStore_1.ChangeLogStore, todoStore_1.TodoStore]
         }), 
-        __metadata('design:paramtypes', [store_1.TodoStore, store_1.ChangeLogStore, http_1.Http])
+        __metadata('design:paramtypes', [todoStore_1.TodoStore, changeLogStore_1.ChangeLogStore])
     ], TodoApp);
     return TodoApp;
 })();

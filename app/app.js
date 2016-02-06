@@ -49,8 +49,8 @@ var RepoApp = (function () {
         this.repoStore.toggleCompletion(repo);
     };
     RepoApp.prototype.remove = function (repo) {
-        this.repoStore.remove(repo);
         this.changeLogStore.remove(repo);
+        this.repoStore.remove(repo);
     };
     RepoApp.prototype.addTodo = function () {
         console.log('addTodo');

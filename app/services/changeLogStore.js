@@ -75,7 +75,9 @@ var ChangeLogStore = (function () {
         this.makeRequest(apiUrl + '?repos=' + repo);
     };
     ChangeLogStore.prototype.remove = function (repo) {
-        this.changelogs.splice(this.changelogs.indexOf(repo), 1);
+        this.changelogs = this.changelogs.filter(function (value) {
+            return value.repoName !== repo.title;
+        });
     };
     ChangeLogStore = __decorate([
         __param(0, core_1.Inject(http_1.Http)), 

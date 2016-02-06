@@ -60,8 +60,8 @@ export default class RepoApp {
 	}
 
 	remove(repo: Repo){
-		this.repoStore.remove(repo);
 		this.changeLogStore.remove(repo);
+		this.repoStore.remove(repo);
 	}
 
 	addTodo() {

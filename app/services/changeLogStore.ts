@@ -73,6 +73,10 @@ export class ChangeLogStore {
 	}
 
 	remove(repo: string) {
-		this.changelogs.splice(this.changelogs.indexOf(repo), 1);
+
+		this.changelogs = this.changelogs.filter(function (value) {
+			return value.repoName !== repo.title;
+		});
+
 	}
 }

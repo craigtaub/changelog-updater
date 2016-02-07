@@ -1,26 +1,26 @@
-<section class="changeloggerapp">
-	<header class="header">
-		<h1>Changelogger</h1>
-		<input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodoText" (keyup.enter)="addTodo()">
+<section class="top-section">
+	<header class="header changeloggerapp">
+		<h1>Changelog Updater</h1>
+		<input class="new-todo" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newTodoText" (keyup.enter)="addTodo()">
 	</header>
-	<section class="main" *ngIf="repoStore.repos.length > 0">
-		<h2>Your Dependencies:</h2>
+	<section class="main changeloggerapp" *ngIf="repoStore.repos.length > 0">
+		<h2 class="sub-header">Your Dependencies:</h2>
 		<ul class="todo-list">
 			<li *ngFor="#repo of repoStore.repos">
 				<div class="view">
-					<label>{{repo.title}}</label>
+					<label><a target="_blank" href="https://github.com/{{repo.title}}">{{repo.title}}</a></label>
 					<button class="destroy" (click)="remove(repo)"></button>
 				</div>
 			</li>
 		</ul>
 	</section>
-	<section class="main" >
-		<h2>Changelog Updates:</h2>
+	<section class="main changeloggerapp">
+		<h2 class="sub-header">Changelog Updates:</h2>
 		<ul class="todo-list">
 			<li *ngFor="#changelog of changeLogStore.changelogs" >
 				<div class="view">
-					<b><p innerHtml="{{ changelog.repoName }}"></p></b>
-					<p innerHtml="{{ changelog.update }}"></p>
+					<b><p innerHtml="{{ changelog.repoName }}:"></p></b>
+					<p class="git-diff" innerHtml="{{ changelog.update }}"></p>
 				</div>
 			</li>
 		</ul>

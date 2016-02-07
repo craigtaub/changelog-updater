@@ -13,7 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var http_1 = require('angular2/http');
 var core_1 = require('angular2/core');
 require('rxjs/operator/map');
-var apiUrl = 'http://localhost:3000/api';
+var apiUrl = window.location.href + 'api';
 var ChangeLog = (function () {
     function ChangeLog(repoName, update) {
         this._repoName = repoName.trim();
@@ -44,13 +44,8 @@ var ChangeLog = (function () {
 exports.ChangeLog = ChangeLog;
 var ChangeLogStore = (function () {
     function ChangeLogStore(http) {
-        console.log('changeLogStore const start');
         this.changelogs = [];
         this.http = http;
-        // when load get request
-        // http.get('http://localhost:3000/api?repos=goatslacker/alt')
-        // this.makeRequest(apiUrl);
-        console.log('changeLogStore const end');
     }
     ChangeLogStore.prototype.makeRequest = function (url) {
         var _this = this;
@@ -65,13 +60,12 @@ var ChangeLogStore = (function () {
         }
     };
     ChangeLogStore.prototype.errorRequest = function (error) {
-        console.log(error);
+        // console.log(error);
     };
     ChangeLogStore.prototype.alwaysRequest = function () {
-        console.log('always run');
+        // console.log('always run')
     };
     ChangeLogStore.prototype.add = function (repo) {
-        console.log('add changeLogStore');
         this.makeRequest(apiUrl + '?repos=' + repo);
     };
     ChangeLogStore.prototype.remove = function (repo) {

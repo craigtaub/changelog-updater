@@ -14,7 +14,6 @@ var RepoApp = (function () {
     function RepoApp(repoStore, changeLogStore) {
         var _this = this;
         this.newTodoText = '';
-        console.log('app constructor');
         this.repoStore = repoStore;
         this.changeLogStore = changeLogStore;
         // when loads app repos already added onto page
@@ -41,11 +40,9 @@ var RepoApp = (function () {
         repo.editing = true;
     };
     RepoApp.prototype.removeCompleted = function () {
-        console.log('removeCompleted');
         this.repoStore.removeCompleted();
     };
     RepoApp.prototype.toggleCompletion = function (repo) {
-        console.log('toggleCompletion');
         this.repoStore.toggleCompletion(repo);
     };
     RepoApp.prototype.remove = function (repo) {
@@ -53,7 +50,6 @@ var RepoApp = (function () {
         this.repoStore.remove(repo);
     };
     RepoApp.prototype.addTodo = function () {
-        console.log('addTodo');
         if (this.newTodoText.trim().length) {
             this.changeLogStore.add(this.newTodoText.trim());
             this.repoStore.add(this.newTodoText);

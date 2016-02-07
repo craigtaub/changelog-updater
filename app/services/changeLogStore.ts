@@ -2,7 +2,7 @@ import {Http} from 'angular2/http';
 import {Inject} from 'angular2/core';
 import 'rxjs/operator/map';
 
-const apiUrl = 'http://localhost:3000/api';
+const apiUrl = window.location.href + 'api';
 
 export class ChangeLog {
 	private _repoName: String;
@@ -32,15 +32,9 @@ export class ChangeLogStore {
 	http: Http;
 
 	constructor(@Inject(Http) http:Http) {
-		console.log('changeLogStore const start');
 		this.changelogs = [];
 
 		this.http = http;
-
-		// when load get request
-		// http.get('http://localhost:3000/api?repos=goatslacker/alt')
-		// this.makeRequest(apiUrl);
-		console.log('changeLogStore const end');
 	}
 
 	makeRequest(url: string) {
@@ -60,23 +54,20 @@ export class ChangeLogStore {
 	}
 
 	errorRequest(error: string) {
-		console.log(error);
+		// console.log(error);
 	}
 
 	alwaysRequest() {
-		console.log('always run')
+		// console.log('always run')
 	}
 
 	add(repo: string) {
-		console.log('add changeLogStore');
 		this.makeRequest(apiUrl + '?repos=' + repo);
 	}
 
 	remove(repo: string) {
-
 		this.changelogs = this.changelogs.filter(function (value) {
 			return value.repoName !== repo.title;
 		});
-
 	}
 }

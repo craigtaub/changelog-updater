@@ -14,7 +14,6 @@ export default class RepoApp {
 	newTodoText = '';
 
 	constructor(repoStore: RepoStore, changeLogStore: ChangeLogStore) {
-		console.log('app constructor');
 		this.repoStore = repoStore;
 		this.changeLogStore = changeLogStore;
 
@@ -50,12 +49,10 @@ export default class RepoApp {
 	}
 
 	removeCompleted() {
-		console.log('removeCompleted');
 		this.repoStore.removeCompleted();
 	}
 
 	toggleCompletion(repo: Repo) {
-		console.log('toggleCompletion');
 		this.repoStore.toggleCompletion(repo);
 	}
 
@@ -65,7 +62,6 @@ export default class RepoApp {
 	}
 
 	addTodo() {
-		console.log('addTodo');
 		if (this.newTodoText.trim().length) {
 			this.changeLogStore.add(this.newTodoText.trim());
 			this.repoStore.add(this.newTodoText);

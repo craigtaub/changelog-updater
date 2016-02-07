@@ -1,6 +1,4 @@
 export class Repo {
-	completed: Boolean;
-	editing: Boolean;
 
 	private _title: String;
 	get title() {
@@ -11,8 +9,6 @@ export class Repo {
 	}
 
 	constructor(title: String) {
-		this.completed = false;
-		this.editing = false;
 		this.title = title.trim();
 	}
 }
@@ -23,9 +19,8 @@ export class RepoStore {
 	constructor() {
 		let persistedRepos = JSON.parse(localStorage.getItem('repo-store') || '[]');
 		// Normalize back into classes
-		this.repos = persistedRepos.map( (repo: {_title: String, completed: Boolean}) => {
+		this.repos = persistedRepos.map( (repo: {_title: String}) => {
 			let ret = new Repo(repo._title);
-			ret.completed = repo.completed;
 			return ret;
 		});
 	}
@@ -35,7 +30,10 @@ export class RepoStore {
 	}
 
 	remove(repo: Repo) {
-		this.repos.splice(this.repos.indexOf(repo), 1);
+		this.repos = this.repos.filter(function (value) {
+			return value.title !== repo.repoName;
+		});
+
 		this.updateStore();
 	}
 

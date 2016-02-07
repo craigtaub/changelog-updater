@@ -65,12 +65,12 @@ var ChangeLogStore = (function () {
     ChangeLogStore.prototype.alwaysRequest = function () {
         // console.log('always run')
     };
-    ChangeLogStore.prototype.add = function (repo) {
-        this.makeRequest(apiUrl + '?repos=' + repo);
+    ChangeLogStore.prototype.add = function (repoName) {
+        this.makeRequest(apiUrl + '?repos=' + repoName);
     };
     ChangeLogStore.prototype.remove = function (repo) {
         this.changelogs = this.changelogs.filter(function (value) {
-            return value.repoName !== repo.title;
+            return value.repoName !== repo.repoName;
         });
     };
     ChangeLogStore = __decorate([

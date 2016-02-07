@@ -1,7 +1,5 @@
 var Repo = (function () {
     function Repo(title) {
-        this.completed = false;
-        this.editing = false;
         this.title = title.trim();
     }
     Object.defineProperty(Repo.prototype, "title", {
@@ -23,7 +21,6 @@ var RepoStore = (function () {
         // Normalize back into classes
         this.repos = persistedRepos.map(function (repo) {
             var ret = new Repo(repo._title);
-            ret.completed = repo.completed;
             return ret;
         });
     }
@@ -31,7 +28,9 @@ var RepoStore = (function () {
         localStorage.setItem('repo-store', JSON.stringify(this.repos));
     };
     RepoStore.prototype.remove = function (repo) {
-        this.repos.splice(this.repos.indexOf(repo), 1);
+        this.repos = this.repos.filter(function (value) {
+            return value.title !== repo.repoName;
+        });
         this.updateStore();
     };
     RepoStore.prototype.add = function (title) {

@@ -61,13 +61,15 @@ export class ChangeLogStore {
 		// console.log('always run')
 	}
 
-	add(repo: string) {
-		this.makeRequest(apiUrl + '?repos=' + repo);
+	add(repoName: string) {
+
+		this.makeRequest(apiUrl + '?repos=' + repoName);
 	}
 
 	remove(repo: string) {
+
 		this.changelogs = this.changelogs.filter(function (value) {
-			return value.repoName !== repo.title;
+			return value.repoName !== repo.repoName;
 		});
 	}
 }

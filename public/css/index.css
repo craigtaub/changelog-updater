@@ -90,13 +90,17 @@ footer p {
 	position: absolute;
 	top: -155px;
 	width: 100%;
-	font-size: 100px;
-	font-weight: 100;
 	text-align: center;
-	color: rgba(175, 47, 47, 1.15);
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 62px;
+	color: black;
+	font-weight: 300;
+	/*font-size: 100px;
+	font-weight: 100;*/
+	/*color: rgba(175, 47, 47, 1.15);
 	-webkit-text-rendering: optimizeLegibility;
 	-moz-text-rendering: optimizeLegibility;
-	text-rendering: optimizeLegibility;
+	text-rendering: optimizeLegibility;*/
 }
 
 .new-changelog,
@@ -228,12 +232,11 @@ label[for='toggle-all'] {
 	text-decoration: line-through;
 }
 
-.changelog-list li .destroy {
+.destroy {
 	display: none;
 	position: absolute;
 	top: 0;
 	right: 10px;
-	bottom: 0;
 	width: 40px;
 	height: 40px;
 	margin: auto 0;
@@ -243,56 +246,16 @@ label[for='toggle-all'] {
 	transition: color 0.2s ease-out;
 }
 
-.changelog-list li .destroy:hover {
+.destroy:hover {
 	color: #af5b5e;
 }
 
-.changelog-list li .destroy:after {
+.destroy:after {
 	content: '×';
 }
 
-.changelog-list li:hover .destroy {
+span:hover .destroy {
 	display: block;
-}
-
-.changelog-list li .edit {
-	display: none;
-}
-
-.changelog-list li.editing:last-child {
-	margin-bottom: -1px;
-}
-
-.footer {
-	color: #777;
-	padding: 10px 15px;
-	height: 20px;
-	text-align: center;
-	border-top: 1px solid #e6e6e6;
-}
-
-.footer:before {
-	content: '';
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	height: 50px;
-	overflow: hidden;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
-	            0 8px 0 -3px #f6f6f6,
-	            0 9px 1px -3px rgba(0, 0, 0, 0.2),
-	            0 16px 0 -6px #f6f6f6,
-	            0 17px 2px -6px rgba(0, 0, 0, 0.2);
-}
-
-.todo-count {
-	float: left;
-	text-align: left;
-}
-
-.todo-count strong {
-	font-weight: 300;
 }
 
 .filters {
@@ -324,19 +287,6 @@ label[for='toggle-all'] {
 
 .filters li a.selected {
 	border-color: rgba(175, 47, 47, 0.2);
-}
-
-.clear-completed,
-html .clear-completed:active {
-	float: right;
-	position: relative;
-	line-height: 20px;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.clear-completed:hover {
-	text-decoration: underline;
 }
 
 .info {

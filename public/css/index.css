@@ -38,6 +38,10 @@ input[type="checkbox"] {
 	outline: none;
 }
 
+footer p {
+	color: black;
+}
+
 .sub-header {
   border-bottom: 1px solid black;
   padding-bottom: 10px;

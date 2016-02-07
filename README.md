@@ -1,25 +1,18 @@
+# NPM Dependency updater
 
-Everytime you run it see ALL your repos of interest most recent CHANGELOG updates.
+Hard to keep track of whats changed or new?
+Ever wondered what the last change for a given repo/dependency is?
 
-Add/remove repos.
+This tool prints the latest changes inside a CHANGELOG and prints it as readable format to the screen.
+It stores your dependencies so its easy to come back and it will instantly show you if anything has changed.
 
-Foreach repo opens CHANGELOG.
-    checks latest commit.
-    grabs contents of that commit
-    adds to paragraph about that repo
+`Express` -> Server side.
+`Angular2` + `TypeScript` -> Client side.
 
-http://localhost:3000/api?repos=goatslacker/alt,goatslacker/iso
+Run client-side
 
-NOTE:
-different changelog locations..have list of all possible ones OR go Badge/Tag route
+    npm run dev
 
-Push notifications.
+Run server-side
 
-NAMES:
-dependecy-notifier
-npm notifier
-
-ISSUES:
-all will be my Auth token so log how many requests making an hour and block if over 5000.
-VERY UNLIKELY...
-Means 1000's in 1 hour..
+    node server

@@ -4,19 +4,18 @@
 		<input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodoText" (keyup.enter)="addTodo()">
 	</header>
 	<section class="main" *ngIf="repoStore.repos.length > 0">
-		<input class="toggle-all" type="checkbox" *ngIf="repoStore.repos.length" #toggleall [checked]="repoStore.allCompleted()" (click)="todoStore.setAllTo(toggleall.checked)">
+		<h2>Your Dependencies:</h2>
 		<ul class="todo-list">
-			<li *ngFor="#repo of repoStore.repos" [class.completed]="repo.completed" [class.editing]="repo.editing">
+			<li *ngFor="#repo of repoStore.repos">
 				<div class="view">
-					<input class="toggle" type="checkbox" (click)="toggleCompletion(repo)" [checked]="repo.completed">
-					<label (dblclick)="editTodo(repo)">{{repo.title}}</label>
+					<label>{{repo.title}}</label>
 					<button class="destroy" (click)="remove(repo)"></button>
 				</div>
-				<input class="edit" *ngIf="repo.editing" [value]="repo.title" #editedtodo (blur)="stopEditing(repo, editedTodo.value)" (keyup.enter)="updateEditingTodo(repo, editedtodo.value)" (keyup.escape)="cancelEditingTodo(repo)">
 			</li>
 		</ul>
 	</section>
 	<section class="main" >
+		<h2>Changelog Updates:</h2>
 		<ul class="todo-list">
 			<li *ngFor="#changelog of changeLogStore.changelogs" >
 				<div class="view">
@@ -26,8 +25,4 @@
 			</li>
 		</ul>
 	</section>
-	<footer class="footer" *ngIf="repoStore.repos.length > 0">
-		<span class="todo-count"><strong>{{repoStore.getRemaining().length}}</strong> {{repoStore.getRemaining().length == 1 ? 'item' : 'items'}} left</span>
-		<button class="clear-completed" *ngIf="repoStore.getCompleted().length > 0" (click)="removeCompleted()">Clear completed</button>
-	</footer>
 </section>

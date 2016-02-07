@@ -37,37 +37,6 @@ export class RepoStore {
 		localStorage.setItem('repo-store', JSON.stringify(this.repos));
 	}
 
-	private getWithCompleted(completed: Boolean) {
-		return this.repos.filter((repo: Repo) => repo.completed === completed);
-	}
-
-	allCompleted() {
-		return this.repos.length === this.getCompleted().length;
-	}
-
-	setAllTo(completed: Boolean) {
-		this.repos.forEach((t: Repo) => t.completed = completed);
-		this.updateStore();
-	}
-
-	removeCompleted() {
-		this.repos = this.getWithCompleted(false);
-		this.updateStore();
-	}
-
-	getRemaining() {
-		return this.getWithCompleted(false);
-	}
-
-	getCompleted() {
-		return this.getWithCompleted(true);
-	}
-
-	toggleCompletion(repo: Repo) {
-		repo.completed = !repo.completed;
-		this.updateStore();
-	}
-
 	remove(repo: Repo) {
 		this.repos.splice(this.repos.indexOf(repo), 1);
 		this.updateStore();

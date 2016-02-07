@@ -20,8 +20,8 @@
 		<ul class="todo-list">
 			<li *ngFor="#changelog of changeLogStore.changelogs" >
 				<div class="view">
-					{{changelog.repoName}} -
-					{{changelog.update}}
+					<b><p innerHtml="{{ changelog.repoName }}"></p></b>
+					<p innerHtml="{{ changelog.update }}"></p>
 				</div>
 			</li>
 		</ul>

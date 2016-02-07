@@ -1,6 +1,7 @@
 import request from 'request';
 import Promise from 'promise';
 import config from '../../config.json';
+import marked from 'marked';
 
 let accessToken = config.accessToken;
 let file = 'CHANGELOG.md';
@@ -71,7 +72,7 @@ function repo(repo) {
 
       let dataObject = {
         repoName: repo,
-        update: finalString
+        update: marked(finalString) 
       };
       return resolve(dataObject);
     });

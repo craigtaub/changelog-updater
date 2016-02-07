@@ -1,12 +1,12 @@
 <section class="top-section">
 	<header class="header changeloggerapp">
 		<h1>Changelog Updater</h1>
-		<input class="new-todo" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newTodoText" (keyup.enter)="addTodo()">
+		<input class="new-changelog" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newTodoText" (keyup.enter)="addTodo()">
 	</header>
 	<section class="main changeloggerapp" *ngIf="repoStore.repos.length > 0">
 		<h2 class="sub-header">Your Dependencies:</h2>
-		<ul class="todo-list">
-			<li *ngFor="#repo of repoStore.repos">
+		<ul class="changelog-list">
+			<li class="list-item" *ngFor="#repo of repoStore.repos">
 				<div class="view">
 					<label><a target="_blank" href="https://github.com/{{repo.title}}">{{repo.title}}</a></label>
 					<button class="destroy" (click)="remove(repo)"></button>
@@ -16,8 +16,8 @@
 	</section>
 	<section class="main changeloggerapp">
 		<h2 class="sub-header">Changelog Updates:</h2>
-		<ul class="todo-list">
-			<li *ngFor="#changelog of changeLogStore.changelogs" >
+		<ul class="changelog-list">
+			<li class="list-item" *ngFor="#changelog of changeLogStore.changelogs" >
 				<div class="view">
 					<b><p innerHtml="{{ changelog.repoName }}:"></p></b>
 					<p class="git-diff" innerHtml="{{ changelog.update }}"></p>

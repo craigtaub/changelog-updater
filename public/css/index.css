@@ -47,9 +47,23 @@ footer p {
   padding-bottom: 10px;
 }
 
+.change-item {
+	font-size: 24px;
+}
+
 .git-diff {
+	font-size: 14px;
   background-color: #ebffeb;
   padding: 10px;
+	font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+.git-diff.hide {
+	display: none;
+}
+
+.git-diff.show {
+	display: block;
 }
 
 .hidden {
@@ -254,7 +268,7 @@ label[for='toggle-all'] {
 	content: '×';
 }
 
-span:hover .destroy {
+.view:hover .destroy {
 	display: block;
 }
 
@@ -292,7 +306,7 @@ span:hover .destroy {
 .info {
 	margin: 65px auto 0;
 	color: #bfbfbf;
-	font-size: 10px;
+	font-size: 14px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	text-align: center;
 }

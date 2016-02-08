@@ -12,14 +12,16 @@ var repoStore_1 = require('./services/repoStore');
 var changeLogStore_1 = require('./services/changeLogStore');
 var RepoApp = (function () {
     function RepoApp(repoStore, changeLogStore) {
-        var _this = this;
         this.newRepoText = '';
         this.repoStore = repoStore;
         this.changeLogStore = changeLogStore;
         // when loads app repos already added onto page
+        // create array to make request to BE
+        var params = [];
         this.repoStore.repos.forEach(function (item) {
-            _this.changeLogStore.add(item.title);
+            params.push(item.title);
         });
+        this.changeLogStore.add(params.join(','));
     }
     RepoApp.prototype.remove = function (repo) {
         this.changeLogStore.remove(repo);
@@ -31,6 +33,9 @@ var RepoApp = (function () {
             this.repoStore.add(this.newRepoText.trim());
             this.newRepoText = '';
         }
+    };
+    RepoApp.prototype.toggle = function (repo) {
+        this.changeLogStore.toggle(repo);
     };
     RepoApp = __decorate([
         core_1.Component({

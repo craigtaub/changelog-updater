@@ -1,17 +1,18 @@
 <section class="top-section">
 	<header class="header changeloggerapp">
-		<h1>Changelog Updater</h1>
+		<h1>Changelog Diff tool</h1>
 		<input class="new-changelog" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newRepoText" (keyup.enter)="addRepo()">
 	</header>
 
 	<h2 class="sub-header">Changelog Updates:</h2>
 	<section class="main changeloggerapp" *ngFor="#changelog of changeLogStore.changelogs">
 			<div class="view">
+				<button class="expand" (click)="toggle(changelog)" >Show/Hide</button>
 				<span>
 					<b><p class="change-item" innerHtml="{{ changelog.repoName }}:"></p></b>
 					<button class="destroy" (click)="remove(changelog)"></button>
 				</span>
-				<p class="git-diff" innerHtml="{{ changelog.update }}"></p>
+				<p class="git-diff {{changelog.show}}" innerHtml="{{ changelog.update }}"></p>
 			</div>
 	</section>
 

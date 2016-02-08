@@ -18,6 +18,7 @@ var ChangeLog = (function () {
     function ChangeLog(repoName, update) {
         this._repoName = repoName.trim();
         this._update = update.trim();
+        this._show = 'hide';
     }
     Object.defineProperty(ChangeLog.prototype, "repoName", {
         get: function () {
@@ -39,6 +40,16 @@ var ChangeLog = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ChangeLog.prototype, "show", {
+        get: function () {
+            return this._show;
+        },
+        set: function (value) {
+            this._show = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return ChangeLog;
 })();
 exports.ChangeLog = ChangeLog;
@@ -54,10 +65,12 @@ var ChangeLogStore = (function () {
             .subscribe(function (data) { return _this.successRequest(data); }, function (err) { return _this.errorRequest(err); }, function () { return _this.alwaysRequest(); });
     };
     ChangeLogStore.prototype.successRequest = function (data) {
-        var item = data.data[0];
-        if (item.hasOwnProperty('repoName')) {
-            this.changelogs.push(new ChangeLog(item.repoName, item.update));
-        }
+        var _this = this;
+        data.data.forEach(function (item) {
+            if (item.hasOwnProperty('repoName')) {
+                _this.changelogs.push(new ChangeLog(item.repoName, item.update));
+            }
+        });
     };
     ChangeLogStore.prototype.errorRequest = function (error) {
         // console.log(error);
@@ -71,6 +84,18 @@ var ChangeLogStore = (function () {
     ChangeLogStore.prototype.remove = function (repo) {
         this.changelogs = this.changelogs.filter(function (value) {
             return value.repoName !== repo.repoName;
+        });
+    };
+    ChangeLogStore.prototype.toggle = function (repo) {
+        this.changelogs.map(function (value) {
+            if (value.repoName === repo.repoName) {
+                if (value.show === 'hide') {
+                    value.show = 'show';
+                }
+                else {
+                    value.show = 'hide';
+                }
+            }
         });
     };
     ChangeLogStore = __decorate([

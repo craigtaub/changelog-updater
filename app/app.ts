@@ -18,9 +18,12 @@ export default class RepoApp {
 		this.changeLogStore = changeLogStore;
 
 		// when loads app repos already added onto page
+		// create array to make request to BE
+		let params = [];
 		this.repoStore.repos.forEach((item) => {
-				this.changeLogStore.add(item.title);
+			params.push(item.title);
 		});
+		this.changeLogStore.add(params.join(','));
 
 	}
 
@@ -35,5 +38,9 @@ export default class RepoApp {
 			this.repoStore.add(this.newRepoText.trim());
 			this.newRepoText = '';
 		}
+	}
+
+	toggle(repo: Repo) {
+		this.changeLogStore.toggle(repo)
 	}
 }

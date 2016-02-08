@@ -7,6 +7,7 @@ const apiUrl = window.location.href + 'api';
 export class ChangeLog {
 	private _repoName: String;
 	private _update: String;
+	private _show: Boolean;
 
 	get repoName() {
 		return this._repoName;
@@ -20,10 +21,16 @@ export class ChangeLog {
 	set update(value: String) {
 		this._update = value.trim();
 	}
-
+	get show() {
+		return this._show;
+	}
+	set show(value: Boolean) {
+		this._show = value;
+	}
 	constructor(repoName: String, update: String) {
 		this._repoName = repoName.trim();
 		this._update = update.trim();
+		this._show = 'hide';
 	}
 }
 
@@ -47,10 +54,11 @@ export class ChangeLogStore {
 			);
 	}
 	successRequest(data: string) {
-		let item = data.data[0];
-		if (item.hasOwnProperty('repoName')) {
-			this.changelogs.push(new ChangeLog(item.repoName, item.update));
-		}
+		data.data.forEach((item) => {
+			if (item.hasOwnProperty('repoName')) {
+				this.changelogs.push(new ChangeLog(item.repoName, item.update));
+			}
+		})
 	}
 
 	errorRequest(error: string) {
@@ -70,6 +78,18 @@ export class ChangeLogStore {
 
 		this.changelogs = this.changelogs.filter(function (value) {
 			return value.repoName !== repo.repoName;
+		});
+	}
+
+	toggle(repo: string) {
+		this.changelogs.map(function (value) {
+			if (value.repoName === repo.repoName) {
+				if (value.show === 'hide') {
+					value.show = 'show';
+				} else {
+					value.show = 'hide';
+				}
+			}
 		});
 	}
 }

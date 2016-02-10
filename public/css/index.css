@@ -58,14 +58,6 @@ footer p {
 	font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 }
 
-.git-diff.hide {
-	display: none;
-}
-
-.git-diff.show {
-	display: block;
-}
-
 .hidden {
 	display: none;
 }
@@ -82,7 +74,7 @@ footer p {
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);*/
 }
 
-.changeloggerapp input::-webkit-input-placeholder {
+/*.changeloggerapp input::-webkit-input-placeholder {
 	font-style: italic;
 	font-weight: 300;
 	color: #e6e6e6;
@@ -98,7 +90,7 @@ footer p {
 	font-style: italic;
 	font-weight: 300;
 	color: #e6e6e6;
-}
+}*/
 
 .changeloggerapp h1 {
 	/*position: absolute;
@@ -142,7 +134,15 @@ footer p {
 	/*background: rgba(0, 0, 0, 0.003);*/
 	background: white;
 	/*box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);*/
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+.show {
+	display: block;
+}
+
+.hide {
+	display: none;
 }
 
 .main {

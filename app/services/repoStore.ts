@@ -1,3 +1,5 @@
+import {ChangeLog} from './changeLogStore';
+
 export class Repo {
 
 	private _title: String;
@@ -29,7 +31,7 @@ export class RepoStore {
 		localStorage.setItem('repo-store', JSON.stringify(this.repos));
 	}
 
-	remove(repo: Repo) {
+	remove(repo: ChangeLog) {
 		this.repos = this.repos.filter(function (value) {
 			return value.title !== repo.repoName;
 		});

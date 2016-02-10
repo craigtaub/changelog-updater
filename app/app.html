@@ -3,9 +3,13 @@
 		<h1>Changelog Diff tool</h1>
 
 		<input class="new-changelog" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newRepoText" (keyup.enter)="addRepo()">
+		<p>
+			Tired of keeping an eye on several <b>repositories</b> at once scanning for changes?<br/>
+			<b>Add</b> your interested repositories and we will keep you <b>updated</b> of <b>releases</b> and accompanying notes.
+		</p>
+
 		Popular examples: <b>nodejs/node, babel/babel, angular/angular, facebook/react</b> etc..
 	</header>
-
 
 
 	<h2 class="sub-header">Changelog Updates:</h2>
@@ -20,4 +24,6 @@
 			</div>
 	</section>
 
+	<h2 class="{{subThanks}}">Thanks for subscribing</h2>
+	<input class="new-changelog {{subStatus}}" placeholder="SUBSCRIBE and get notified when there is a change" [(ngModel)]="newSubText" (keyup.enter)="addSub()">
 </section>

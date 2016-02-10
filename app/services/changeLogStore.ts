@@ -7,7 +7,7 @@ const apiUrl = window.location.href + 'api';
 export class ChangeLog {
 	private _repoName: String;
 	private _update: String;
-	private _show: Boolean;
+	private _show: String;
 
 	get repoName() {
 		return this._repoName;
@@ -24,7 +24,7 @@ export class ChangeLog {
 	get show() {
 		return this._show;
 	}
-	set show(value: Boolean) {
+	set show(value: String) {
 		this._show = value;
 	}
 	constructor(repoName: String, update: String) {
@@ -44,18 +44,34 @@ export class ChangeLogStore {
 		this.http = http;
 	}
 
-	makeRequest(url: string) {
-		this.http.get(url)
-			.map(res => res.json())
-			.subscribe(
-				data => this.successRequest(data),
-				err => this.errorRequest(err),
-				() => this.alwaysRequest()
-			);
+	useFixture() {
+		let data = {
+			data: [
+				{
+					repoName: 'testFixture',
+					update: 'some fixture data'
+				}
+			]
+		};
+		this.successRequest(data);
 	}
-	successRequest(data: string) {
+
+	makeRequest(url: string) {
+		// Use Fixture
+		this.useFixture();
+
+		// Use Live
+		// this.http.get(url)
+		// 	.map(res => res.json())
+		// 	.subscribe(
+		// 		data => this.successRequest(data),
+		// 		err => this.errorRequest(err),
+		// 		() => this.alwaysRequest()
+		// 	);
+	}
+	successRequest(data) {
     	if (data.data !== 'no repo') {
-			data.data.forEach((item) => {
+			data.data.forEach((item: ChangeLog) => {
 				if (item.hasOwnProperty('repoName')) {
 					this.changelogs.push(new ChangeLog(item.repoName, item.update));
 				}
@@ -76,14 +92,14 @@ export class ChangeLogStore {
 		this.makeRequest(apiUrl + '?repos=' + repoName);
 	}
 
-	remove(repo: string) {
+	remove(repo: ChangeLog) {
 
 		this.changelogs = this.changelogs.filter(function (value) {
 			return value.repoName !== repo.repoName;
 		});
 	}
 
-	toggle(repo: string) {
+	toggle(repo: ChangeLog) {
 		this.changelogs.map(function (value) {
 			if (value.repoName === repo.repoName) {
 				if (value.show === 'hide') {

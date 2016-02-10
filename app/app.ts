@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {RepoStore, Repo} from './services/repoStore';
-import {ChangeLogStore} from './services/changeLogStore';
+import {ChangeLogStore, ChangeLog} from './services/changeLogStore';
 
 @Component({
 	selector: 'repo-app',
@@ -12,6 +12,8 @@ export default class RepoApp {
 	repoStore: RepoStore;
 	changeLogStore: ChangeLogStore;
 	newRepoText = '';
+	subStatus = 'show';
+	subThanks = 'hide';
 
 	constructor(repoStore: RepoStore, changeLogStore: ChangeLogStore) {
 		this.repoStore = repoStore;
@@ -27,7 +29,7 @@ export default class RepoApp {
 
 	}
 
-	remove(repo: Repo){
+	remove(repo: ChangeLog){
 		this.changeLogStore.remove(repo);
 		this.repoStore.remove(repo);
 	}
@@ -40,7 +42,13 @@ export default class RepoApp {
 		}
 	}
 
-	toggle(repo: Repo) {
+	toggle(repo: ChangeLog) {
 		this.changeLogStore.toggle(repo)
+	}
+
+	addSub() {
+		console.log(this.newSubText);
+		this.subStatus = 'hide';
+		this.subThanks = 'show';
 	}
 }

@@ -13,6 +13,8 @@ var changeLogStore_1 = require('./services/changeLogStore');
 var RepoApp = (function () {
     function RepoApp(repoStore, changeLogStore) {
         this.newRepoText = '';
+        this.subStatus = 'show';
+        this.subThanks = 'hide';
         this.repoStore = repoStore;
         this.changeLogStore = changeLogStore;
         // when loads app repos already added onto page
@@ -36,6 +38,11 @@ var RepoApp = (function () {
     };
     RepoApp.prototype.toggle = function (repo) {
         this.changeLogStore.toggle(repo);
+    };
+    RepoApp.prototype.addSub = function () {
+        console.log(this.newSubText);
+        this.subStatus = 'hide';
+        this.subThanks = 'show';
     };
     RepoApp = __decorate([
         core_1.Component({

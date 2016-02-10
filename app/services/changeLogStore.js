@@ -58,11 +58,28 @@ var ChangeLogStore = (function () {
         this.changelogs = [];
         this.http = http;
     }
+    ChangeLogStore.prototype.useFixture = function () {
+        var data = {
+            data: [
+                {
+                    repoName: 'testFixture',
+                    update: 'some fixture data'
+                }
+            ]
+        };
+        this.successRequest(data);
+    };
     ChangeLogStore.prototype.makeRequest = function (url) {
-        var _this = this;
-        this.http.get(url)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (data) { return _this.successRequest(data); }, function (err) { return _this.errorRequest(err); }, function () { return _this.alwaysRequest(); });
+        // Use Fixture
+        this.useFixture();
+        // Use Live
+        // this.http.get(url)
+        // 	.map(res => res.json())
+        // 	.subscribe(
+        // 		data => this.successRequest(data),
+        // 		err => this.errorRequest(err),
+        // 		() => this.alwaysRequest()
+        // 	);
     };
     ChangeLogStore.prototype.successRequest = function (data) {
         var _this = this;

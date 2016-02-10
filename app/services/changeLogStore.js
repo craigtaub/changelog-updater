@@ -66,11 +66,13 @@ var ChangeLogStore = (function () {
     };
     ChangeLogStore.prototype.successRequest = function (data) {
         var _this = this;
-        data.data.forEach(function (item) {
-            if (item.hasOwnProperty('repoName')) {
-                _this.changelogs.push(new ChangeLog(item.repoName, item.update));
-            }
-        });
+        if (data.data !== 'no repo') {
+            data.data.forEach(function (item) {
+                if (item.hasOwnProperty('repoName')) {
+                    _this.changelogs.push(new ChangeLog(item.repoName, item.update));
+                }
+            });
+        }
     };
     ChangeLogStore.prototype.errorRequest = function (error) {
         // console.log(error);

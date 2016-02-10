@@ -54,11 +54,13 @@ export class ChangeLogStore {
 			);
 	}
 	successRequest(data: string) {
-		data.data.forEach((item) => {
-			if (item.hasOwnProperty('repoName')) {
-				this.changelogs.push(new ChangeLog(item.repoName, item.update));
-			}
-		})
+    	if (data.data !== 'no repo') {
+			data.data.forEach((item) => {
+				if (item.hasOwnProperty('repoName')) {
+					this.changelogs.push(new ChangeLog(item.repoName, item.update));
+				}
+			});
+		}
 	}
 
 	errorRequest(error: string) {

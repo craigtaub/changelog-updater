@@ -2,12 +2,13 @@
 	<header class="header changeloggerapp">
 		<h1>Changelog Diff tool</h1>
 
-		<input class="new-changelog" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newRepoText" (keyup.enter)="addRepo()">
 		<p>
 			Tired of keeping an eye on several <b>repositories</b> at once scanning for changes?<br/>
-			<b>Add</b> your interested repositories and we will keep you <b>updated</b> of <b>releases</b> and accompanying notes.
+			<b>Add</b> your interested repositories and we will keep you <b>updated</b> of <b>releases</b> and accompanying notes. <br/>
+			Try it yourself...
 		</p>
 
+		<input class="new-changelog" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newRepoText" (keyup.enter)="addRepo()">
 		Popular examples: <b>nodejs/node, babel/babel, angular/angular, facebook/react</b> etc..
 	</header>
 

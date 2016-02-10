@@ -1,6 +1,7 @@
 import Express from 'express';
 import fs from 'fs';
 import github from './middleware/github';
+import subscribe from './middleware/subscribe';
 
 const app = Express();
 const port = 3000;
@@ -19,6 +20,8 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api', github);
+
+app.get('/subscribe', subscribe);
 
 const server = app.listen(port, function () {
     const host = server.address().address;

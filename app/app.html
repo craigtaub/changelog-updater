@@ -2,18 +2,27 @@
 	<header class="header changeloggerapp">
 		<h1>Changelog Diff tool</h1>
 
-		<p>
-			Tired of keeping an eye on several <b>repositories</b> at once scanning for changes?<br/>
-			<b>Add</b> your interested repositories and we will keep you <b>updated</b> of <b>releases</b> and accompanying notes. <br/>
-			Try it yourself...
-		</p>
+		<div class="intro show">
+			<h2 class="sub-header">Problem:</h2>
+			<p>Tired of repeatedly keeping an eye on multiple <b>repositories</b> at once, scanning for changes?<br/></p>
 
+			<b><span style="color:Red; font-size:21px;padding-right:300px;">THE CHANGELOG</span> 			<span style="color: red; font-size:21px;">EVENTUALLY FINDING THE CHANGE</span><br/></b>
+			<img width="45%" src="/public/imgs/snap_readable_large.png"/>
+			<img  src="/public/imgs/line.png"/>
+			<img width="45%" src="/public/imgs/snap_slimmer.png"/>
+
+			<h2 class="sub-header">Solution:</h2>
+			<p>
+				<b>Add</b> your interested repositories and we will keep you <b>updated</b> of <b>releases</b> and accompanying notes :) <br/>
+				Try it yourself...
+			</p>
+		</div>
 		<input class="new-changelog" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newRepoText" (keyup.enter)="addRepo()">
 		Popular examples: <b>nodejs/node, babel/babel, angular/angular, facebook/react</b> etc..
 	</header>
 
 
-	<h2 class="sub-header">Changelog Updates:</h2>
+	<h2 class="sub-header">Your Changelog Updates:</h2>
 	<section class="main changeloggerapp" *ngFor="#changelog of changeLogStore.changelogs">
 			<div class="view">
 				<button class="expand" (click)="toggle(changelog)" >Show/Hide</button>
@@ -25,6 +34,7 @@
 			</div>
 	</section>
 
+	<h2 class="sub-header">Subscribe:</h2>
 	<h2 class="{{subThanks}}">Thanks for subscribing</h2>
-	<input class="new-changelog {{subStatus}}" placeholder="SUBSCRIBE and get notified when there is a change" [(ngModel)]="newSubText" (keyup.enter)="addSub()">
+	<input class="new-changelog {{subStatus}}" placeholder="Get notified when there is a change" [(ngModel)]="newSubText" (keyup.enter)="addSub()">
 </section>

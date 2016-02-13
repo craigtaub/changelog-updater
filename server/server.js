@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
 
 app.get('/api', github);
 
-app.get('/subscribe', subscribe);
+app.get('/subscribe/:email', subscribe);
 
 const server = app.listen(port, function () {
     const host = server.address().address;

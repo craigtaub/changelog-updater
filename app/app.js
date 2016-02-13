@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41,6 +42,7 @@ var RepoApp = (function () {
     };
     RepoApp.prototype.addSub = function () {
         console.log(this.newSubText);
+        // send to subscribe/:email route.
         this.subStatus = 'hide';
         this.subThanks = 'show';
     };
@@ -53,7 +55,7 @@ var RepoApp = (function () {
         __metadata('design:paramtypes', [repoStore_1.RepoStore, changeLogStore_1.ChangeLogStore])
     ], RepoApp);
     return RepoApp;
-})();
+}());
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = RepoApp;
 //# sourceMappingURL=app.js.map

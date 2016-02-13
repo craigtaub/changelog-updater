@@ -48,6 +48,7 @@ export default class RepoApp {
 
 	addSub() {
 		console.log(this.newSubText);
+		// send to subscribe/:email route.
 		this.subStatus = 'hide';
 		this.subThanks = 'show';
 	}

@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,12 +7,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('angular2/core');
 var repoStore_1 = require('./services/repoStore');
 var changeLogStore_1 = require('./services/changeLogStore');
+var http_1 = require('angular2/http');
+var core_2 = require('angular2/core');
+var apiUrl = window.location.href + 'subscribe';
 var RepoApp = (function () {
-    function RepoApp(repoStore, changeLogStore) {
+    function RepoApp(repoStore, changeLogStore, http) {
         this.newRepoText = '';
+        this.newSubText = '';
         this.subStatus = 'show';
         this.subThanks = 'hide';
         this.repoStore = repoStore;
@@ -25,6 +31,7 @@ var RepoApp = (function () {
             params.push(item.title);
         });
         this.changeLogStore.add(params.join(','));
+        this.http = http;
     }
     RepoApp.prototype.remove = function (repo) {
         this.changeLogStore.remove(repo);
@@ -32,17 +39,27 @@ var RepoApp = (function () {
     };
     RepoApp.prototype.addRepo = function () {
         if (this.newRepoText.trim().length) {
-            this.changeLogStore.add(this.newRepoText.trim());
-            this.repoStore.add(this.newRepoText.trim());
-            this.newRepoText = '';
+            // cant add more than 10
+            if (this.changeLogStore.changelogs.length < 10) {
+                this.changeLogStore.add(this.newRepoText.trim());
+                this.repoStore.add(this.newRepoText.trim());
+                this.newRepoText = '';
+            }
+            else {
+                this.newRepoText = 'Sorry you have hit the limit';
+            }
         }
     };
     RepoApp.prototype.toggle = function (repo) {
         this.changeLogStore.toggle(repo);
     };
     RepoApp.prototype.addSub = function () {
-        console.log(this.newSubText);
-        // send to subscribe/:email route.
+        var _this = this;
+        this.http.get(apiUrl + '/' + this.newSubText)
+            .map(function (res) { return res.text(); })
+            .subscribe(function () { return _this.alwaysRequest(); });
+    };
+    RepoApp.prototype.alwaysRequest = function () {
         this.subStatus = 'hide';
         this.subThanks = 'show';
     };
@@ -51,11 +68,12 @@ var RepoApp = (function () {
             selector: 'repo-app',
             templateUrl: 'app/app.html',
             bindings: [changeLogStore_1.ChangeLogStore, repoStore_1.RepoStore]
-        }), 
-        __metadata('design:paramtypes', [repoStore_1.RepoStore, changeLogStore_1.ChangeLogStore])
+        }),
+        __param(2, core_2.Inject(http_1.Http)), 
+        __metadata('design:paramtypes', [repoStore_1.RepoStore, changeLogStore_1.ChangeLogStore, http_1.Http])
     ], RepoApp);
     return RepoApp;
-}());
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = RepoApp;
 //# sourceMappingURL=app.js.map

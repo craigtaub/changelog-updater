@@ -58,16 +58,16 @@ export class ChangeLogStore {
 
 	makeRequest(url: string) {
 		// Use Fixture
-		this.useFixture();
+		// this.useFixture();
 
 		// Use Live
-		// this.http.get(url)
-		// 	.map(res => res.json())
-		// 	.subscribe(
-		// 		data => this.successRequest(data),
-		// 		err => this.errorRequest(err),
-		// 		() => this.alwaysRequest()
-		// 	);
+		this.http.get(url)
+			.map(res => res.json())
+			.subscribe(
+				data => this.successRequest(data),
+				err => this.errorRequest(err),
+				() => this.alwaysRequest()
+			);
 	}
 	successRequest(data) {
     	if (data.data !== 'no repo') {

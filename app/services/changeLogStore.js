@@ -71,15 +71,12 @@ var ChangeLogStore = (function () {
     };
     ChangeLogStore.prototype.makeRequest = function (url) {
         // Use Fixture
-        this.useFixture();
+        // this.useFixture();
+        var _this = this;
         // Use Live
-        // this.http.get(url)
-        // 	.map(res => res.json())
-        // 	.subscribe(
-        // 		data => this.successRequest(data),
-        // 		err => this.errorRequest(err),
-        // 		() => this.alwaysRequest()
-        // 	);
+        this.http.get(url)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (data) { return _this.successRequest(data); }, function (err) { return _this.errorRequest(err); }, function () { return _this.alwaysRequest(); });
     };
     ChangeLogStore.prototype.successRequest = function (data) {
         var _this = this;

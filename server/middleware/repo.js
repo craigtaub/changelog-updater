@@ -39,9 +39,13 @@ function repo(repo) {
       request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           let info = JSON.parse(body);
-          let lastCommit = info[0].sha;
+          if (info[0].sha) {
+            let lastCommit = info[0].sha;
+            return resolve(lastCommit);
+          } else {
+            return resolve('');
+          }
 
-          return resolve(lastCommit);
         } else {
           console.log('sorry error lastUrl occured');
           return resolve('');
@@ -72,7 +76,7 @@ function repo(repo) {
 
       let dataObject = {
         repoName: repo,
-        update: marked(finalString) 
+        update: marked(finalString)
       };
       return resolve(dataObject);
     });

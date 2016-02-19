@@ -4,7 +4,7 @@ import github from './middleware/github';
 import subscribe from './middleware/subscribe';
 
 const app = Express();
-const port = 80;
+const port = 3000;
 
 app.use('/node_modules', Express.static('node_modules'));
 app.use('/app', Express.static('app'));

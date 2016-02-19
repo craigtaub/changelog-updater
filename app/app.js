@@ -26,7 +26,7 @@ var RepoApp = (function () {
         this.showIntroStatus = 'show';
         this.repoStore = repoStore;
         this.changeLogStore = changeLogStore;
-        if (this.getCookie('changelog-tool-dismiss') !== '1') {
+        if (localStorage.getItem('changelog-tool-dismiss') !== '1') {
             this.introStatus = 'show';
             this.showIntroStatus = 'hide';
         }
@@ -72,35 +72,12 @@ var RepoApp = (function () {
     RepoApp.prototype.dismiss = function () {
         this.introStatus = 'hide';
         this.showIntroStatus = 'show';
-        this.setCookie('changelog-tool-dismiss', '1', 60);
+        localStorage.setItem('changelog-tool-dismiss', '1');
     };
     RepoApp.prototype.display = function () {
         this.introStatus = 'show';
         this.showIntroStatus = 'hide';
-        this.deleteCookie('changelog-tool-dismiss');
-    };
-    RepoApp.prototype.setCookie = function (name, value, expireDays, path) {
-        if (path === void 0) { path = ''; }
-        var d = new Date();
-        d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
-        var expires = 'expires=' + d.toUTCString();
-        document.cookie = name + '=' + value + '; ' + expires + (path.length > 0 ? '; path=' + path : '');
-    };
-    RepoApp.prototype.getCookie = function (name) {
-        var ca = document.cookie.split(';');
-        var caLen = ca.length;
-        var cookieName = name + '=';
-        var c;
-        for (var i = 0; i < caLen; i += 1) {
-            c = ca[i].replace(/^\s\+/g, '');
-            if (c.indexOf(cookieName) == 0) {
-                return c.substring(cookieName.length, c.length);
-            }
-        }
-        return '';
-    };
-    RepoApp.prototype.deleteCookie = function (name) {
-        this.setCookie(name, "", -1);
+        localStorage.setItem('changelog-tool-dismiss', '0');
     };
     RepoApp = __decorate([
         core_1.Component({

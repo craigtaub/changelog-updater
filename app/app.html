@@ -1,8 +1,10 @@
 <section class="top-section">
 	<header class="header changeloggerapp">
-		<h1>Github diff tool</h1>
+		<h1>Github Changelog tool</h1>
 
-		<div class="intro show">
+		<div class="intro {{introStatus}}">
+
+			<button class="dismiss" (click)="dismiss()">Dismiss</button>
 			<h2 class="sub-header">Problem:</h2>
 			<p>Tired of repeatedly keeping an eye on multiple <b>repositories</b> at once, scanning for changes?<br/></p>
 
@@ -14,7 +16,7 @@
 			</p>
 		</div>
 		<input class="new-changelog" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newRepoText" (keyup.enter)="addRepo()">
-		Popular examples: <b>nodejs/node, babel/babel, angular/angular, facebook/react</b> etc..
+		Popular examples: <b>nodejs/node, babel/babel, facebook/relay, reactjs/redux, angular/angular, facebook/react</b> etc..
 	</header>
 
 

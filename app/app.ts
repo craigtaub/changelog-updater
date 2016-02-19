@@ -19,11 +19,16 @@ export default class RepoApp {
 	newSubText = '';
 	subStatus = 'show';
 	subThanks = 'hide';
+	introStatus = 'hide';
 	http: Http;
 
 	constructor(repoStore: RepoStore, changeLogStore: ChangeLogStore, @Inject(Http) http:Http) {
 		this.repoStore = repoStore;
 		this.changeLogStore = changeLogStore;
+
+		if (this.getCookie('changelog-tool-dismiss') !== '1') {
+			this.introStatus = 'show';
+		}
 
 		// when loads app repos already added onto page
 		// create array to make request to BE
@@ -70,6 +75,33 @@ export default class RepoApp {
 	alwaysRequest() {
 		this.subStatus = 'hide';
 		this.subThanks = 'show';
+	}
+
+	dismiss() {
+		this.introStatus = 'hide';
+		this.setCookie('changelog-tool-dismiss', '1', 7);
+	}
+
+	setCookie(name: string, value: string, expireDays: number, path: string = '') {
+		let d:Date = new Date();
+		d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
+		let expires:string = 'expires=' + d.toUTCString();
+		document.cookie = name + '=' + value + '; ' + expires + (path.length > 0 ? '; path=' + path : '');
+	}
+
+	getCookie(name: string) {
+		let ca: Array<string> = document.cookie.split(';');
+		let caLen: number = ca.length;
+		let cookieName = name + '=';
+		let c: string;
+
+		for (let i: number = 0; i < caLen; i += 1) {
+				c = ca[i].replace(/^\s\+/g, '');
+				if (c.indexOf(cookieName) == 0) {
+						return c.substring(cookieName.length, c.length);
+				}
+		}
+		return '';
 	}
 
 }

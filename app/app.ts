@@ -20,6 +20,7 @@ export default class RepoApp {
 	subStatus = 'show';
 	subThanks = 'hide';
 	introStatus = 'hide';
+	showIntroStatus = 'show';
 	http: Http;
 
 	constructor(repoStore: RepoStore, changeLogStore: ChangeLogStore, @Inject(Http) http:Http) {
@@ -28,6 +29,7 @@ export default class RepoApp {
 
 		if (this.getCookie('changelog-tool-dismiss') !== '1') {
 			this.introStatus = 'show';
+			this.showIntroStatus = 'hide';
 		}
 
 		// when loads app repos already added onto page
@@ -79,7 +81,14 @@ export default class RepoApp {
 
 	dismiss() {
 		this.introStatus = 'hide';
-		this.setCookie('changelog-tool-dismiss', '1', 7);
+		this.showIntroStatus = 'show';
+		this.setCookie('changelog-tool-dismiss', '1', 60);
+	}
+
+	display() {
+		this.introStatus = 'show';
+		this.showIntroStatus = 'hide';
+		this.deleteCookie('changelog-tool-dismiss');
 	}
 
 	setCookie(name: string, value: string, expireDays: number, path: string = '') {
@@ -103,5 +112,10 @@ export default class RepoApp {
 		}
 		return '';
 	}
+
+	deleteCookie(name: string) {
+       this.setCookie(name, "", -1);
+   }
+
 
 }

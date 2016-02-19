@@ -23,10 +23,12 @@ var RepoApp = (function () {
         this.subStatus = 'show';
         this.subThanks = 'hide';
         this.introStatus = 'hide';
+        this.showIntroStatus = 'show';
         this.repoStore = repoStore;
         this.changeLogStore = changeLogStore;
         if (this.getCookie('changelog-tool-dismiss') !== '1') {
             this.introStatus = 'show';
+            this.showIntroStatus = 'hide';
         }
         // when loads app repos already added onto page
         // create array to make request to BE
@@ -69,7 +71,13 @@ var RepoApp = (function () {
     };
     RepoApp.prototype.dismiss = function () {
         this.introStatus = 'hide';
-        this.setCookie('changelog-tool-dismiss', '1', 7);
+        this.showIntroStatus = 'show';
+        this.setCookie('changelog-tool-dismiss', '1', 60);
+    };
+    RepoApp.prototype.display = function () {
+        this.introStatus = 'show';
+        this.showIntroStatus = 'hide';
+        this.deleteCookie('changelog-tool-dismiss');
     };
     RepoApp.prototype.setCookie = function (name, value, expireDays, path) {
         if (path === void 0) { path = ''; }
@@ -90,6 +98,9 @@ var RepoApp = (function () {
             }
         }
         return '';
+    };
+    RepoApp.prototype.deleteCookie = function (name) {
+        this.setCookie(name, "", -1);
     };
     RepoApp = __decorate([
         core_1.Component({

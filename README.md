@@ -1,13 +1,19 @@
-# NPM Dependency updater
+# Github Changelog tool
 
-Hard to keep track of whats changed or new?
-Ever wondered what the last change for a given repo/dependency is?
+https://github-changelog.com/
 
-This tool prints the latest changes inside a CHANGELOG and prints it as readable format to the screen.
-It stores your dependencies so its easy to come back and it will instantly show you if anything has changed.
+## Problem
+Tired of repeatedly keeping an eye on multiple repositories on Github at once? scanning CHANGELOG's for changes?
+
+## Solution
+Add your interested repositories and we will always print the latest update or release (including accompanying notes and commits/links). Try it yourself.
+
+## Architecture
 
 - `Express` -> Server side.
 - `Angular2` + `TypeScript` -> Client side.
+
+## Running the app
 
 Run client-side
 

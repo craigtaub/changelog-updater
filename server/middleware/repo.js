@@ -39,7 +39,7 @@ function repo(repo) {
       request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           let info = JSON.parse(body);
-          if (info[0].sha) {
+          if (info[0] !== undefined && info[0].sha) {
             let lastCommit = info[0].sha;
             return resolve(lastCommit);
           } else {

@@ -7,13 +7,13 @@
 
 			<button class="dismiss" (click)="dismiss()">Dismiss</button>
 			<h2 class="sub-header">Problem:</h2>
-			<p>Tired of repeatedly keeping an eye on multiple <b>repositories</b> at once, scanning for changes?<br/></p>
+			<p>Tired of repeatedly keeping an eye on multiple <b>repositories on Github</b> at once? Scanning <b>CHANGELOG's</b> for changes?<br/></p>
 
 			<img src="/public/imgs/full.png"/>
 
 			<h2 class="sub-header">Solution:</h2>
 			<p>
-				<b>Add</b> your interested repositories and we will keep you <b>updated</b> of <b>releases</b> and accompanying notes and commits/links. Try it yourself...
+				Add your <b>interested repositories</b> and we will always <b>print the latest update</b> or release (including accompanying notes and commits/links). Try it yourself...
 			</p>
 		</div>
 		<input class="new-changelog" placeholder="Github dependency in format 'owner/repo' e.g. babel/babel" autofocus="" [(ngModel)]="newRepoText" (keyup.enter)="addRepo()">

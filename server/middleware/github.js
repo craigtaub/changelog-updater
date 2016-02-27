@@ -16,6 +16,8 @@ function github(req, resp) {
 
     Promise.all(promiseArray)
       .then(function (res) {
+         resp.setHeader('Access-Control-Allow-Origin', '*');
+         resp.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
          resp.setHeader('Content-Type', 'application/json');
          return resp.send(JSON.stringify({data: res}, null, 3));
       })
@@ -24,6 +26,8 @@ function github(req, resp) {
       });
 
   } else {
+    resp.setHeader('Access-Control-Allow-Origin', '*');
+    resp.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     resp.setHeader('Content-Type', 'application/json');
     return resp.send(JSON.stringify({data: 'no repo'}, null, 3));
   }

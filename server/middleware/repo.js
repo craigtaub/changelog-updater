@@ -10,8 +10,9 @@ let headers = {
 };
 
 function repo(repo) {
-
+  var theLastCommit = '';
   function getCommitMarkup(lastCommit) {
+    theLastCommit = lastCommit;
     return new Promise(function (resolve, reject) {
       let options = {
         url: 'https://api.github.com/repos/' + repo + '/commits/' + lastCommit + '?access_token=' + accessToken,
@@ -76,7 +77,8 @@ function repo(repo) {
 
       let dataObject = {
         repoName: repo,
-        update: marked(finalString)
+        update: marked(finalString),
+        lastCommit: theLastCommit
       };
       return resolve(dataObject);
     });

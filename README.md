@@ -2,6 +2,8 @@
 
 https://github-changelog.com/
 
+Or download the Chrome extension: https://chrome.google.com/webstore/detail/github-changelog-notifier/amedcooaljaccpdffdkcflgiagpcjldn
+
 ## Problem
 Tired of repeatedly keeping an eye on multiple repositories on Github at once? scanning CHANGELOG's for changes?
 
